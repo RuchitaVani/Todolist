@@ -1,0 +1,39 @@
+<!-- Form to view and edit priority details -->
+<div class="container">
+    <form (ngSubmit)="savePriority()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          [(ngModel)]="priority.name"
+          name="name"
+          class="form-control"
+          id="name"
+          required
+        />
+      </div>
+      
+      <div class="form-group">
+        <label for="dateCreated">DateCreated</label>
+        <input
+          [(ngModel)]="priority.dateCreated"
+          name="dateCreated"
+          type="date"
+          class="form-control"
+          id="dateCreated"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-success">Save</button>
+      
+      <button
+        type="button"
+        (click)="deletePriority()"
+        class="btn btn-danger"
+        *ngIf="priority.priorityId">Delete</button>
+
+      <button type="button" (click)="goBack()" class="btn btn-secondary">
+        Back
+      </button>
+    </form>
+  </div>

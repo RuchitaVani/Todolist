@@ -1,0 +1,28 @@
+<div class="container">
+    <button (click)="addPriority()" class="btn btn-success mb-3">New priority</button>
+
+    <button type="button" (click)="goBack()" class="btn btn-secondary mb-3 ml-2">
+        Back
+      </button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let priority of prioritys">
+                <td>{{ priority.name }}</td>
+                <td>{{ priority.dateCreated | date: 'yyyy-MM-dd'}}</td>
+                <td>
+                    <!-- Button to view priority details -->
+                    <button (click)="viewPriority(priority.priorityId)" class="btn btn-primary">
+                        View
+                    </button>
+                   
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
