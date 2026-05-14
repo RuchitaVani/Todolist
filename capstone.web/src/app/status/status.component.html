@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="form-border">
+      <form (ngSubmit)="saveStatus()" #statusForm="ngForm" class="form-container">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="status.name"
+            name="name"
+            required
+            class="large-input"
+            #nameInput="ngModel"
+          />
+          <mat-error *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)">
+            Name is required.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Choose a date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="status.dateCreated"
+            name="dateCreated"
+            required
+            #dateInput="ngModel"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+             <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="dateInput.invalid && (dateInput.dirty || dateInput.touched)">
+            Date is required.
+          </mat-error>
+        </mat-form-field>
+  
+        <section class="button-container">
+          <button mat-raised-button color="primary" class="large-button" [disabled]="statusForm.invalid">Save</button>
+          <button mat-raised-button color="" (click)="goBack()" class="large-button" style="background-color: black; color: white;">Back</button>
+        </section>
+      </form>
+    </div>
+  </div>

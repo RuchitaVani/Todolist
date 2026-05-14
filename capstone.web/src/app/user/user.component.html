@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="form-border">
+    <form (ngSubmit)="saveUser()" #userForm="ngForm" class="form-container">
+
+      <!-- First Name -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.firstName"
+          name="firstName"
+          required
+          class="large-input"
+          #firstNameInput="ngModel"
+        />
+        <mat-error *ngIf="firstNameInput.invalid && (firstNameInput.dirty || firstNameInput.touched)">
+          First Name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Last Name -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Last Name</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.lastName"
+          name="lastName"
+          required
+          class="large-input"
+          #lastNameInput="ngModel"
+        />
+        <mat-error *ngIf="lastNameInput.invalid && (lastNameInput.dirty || lastNameInput.touched)">
+          Last Name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          [(ngModel)]="user.email"
+          name="email"
+          required
+          class="large-input"
+          #emailInput="ngModel"
+        />
+        <mat-error *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+          Valid email is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Username -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.username"
+          name="username"
+          required
+          class="large-input"
+          #usernameInput="ngModel"
+        />
+        <mat-error *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)">
+          Username is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          [(ngModel)]="user.passwordHash"
+          name="passwordHash"
+          class="large-input"
+          #passwordInput="ngModel"
+        />
+        <mat-hint>Password is optional for updates.</mat-hint>
+      </mat-form-field>
+
+      <!-- Role -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="user.role" name="role" required #roleInput="ngModel">
+          <mat-option value="Administrator">Administrator</mat-option>
+          <mat-option value="General">General</mat-option>
+        </mat-select>
+        <mat-error *ngIf="roleInput.invalid && (roleInput.dirty || roleInput.touched)">
+          Role is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Buttons -->
+      <section class="button-container">
+        <button mat-raised-button color="primary" class="large-button" [disabled]="userForm.invalid">Save</button>
+        <button mat-raised-button color="warn" (click)="deleteUser()" class="large-button" style="background-color: red; color: white;">Delete</button>
+        <button mat-raised-button color="" (click)="goBack()" class="large-button" style="background-color: black; color: white;">Back</button>
+      </section>
+    </form>
+  </div>
+</div>

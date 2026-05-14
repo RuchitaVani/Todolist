@@ -4,12 +4,14 @@ import { PriorityService } from '../services/priority.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-priority-list',
-  templateUrl: './priority-list.component.html',
-  styleUrl: './priority-list.component.css'
+    selector: 'app-priority-list',
+    templateUrl: './priority-list.component.html',
+    styleUrl: './priority-list.component.css',
+    standalone: false
 })
 export class PriorityListComponent implements OnInit{
   prioritys: Priority[] = []; // Array to hold list of persons
+  displayedColumns: string[] = ['name', 'dateCreated' , 'action','actiondelete'];
   
  
     constructor(
@@ -21,7 +23,6 @@ export class PriorityListComponent implements OnInit{
        // Fetch Prioritys on component initialization
        this.priorityService.getPrioritys().subscribe((data) => {
         this.prioritys = data;
-        console.log(data);
       });
   }
 
@@ -29,13 +30,19 @@ export class PriorityListComponent implements OnInit{
   viewPriority(id: number) {
     this.router.navigate(['/priority', id]);
   }
-
+  deletePriority(id: number) {
+    if (confirm('Are you sure you want to delete this priority?')) {
+      this.priorityService.deletePriority(id).subscribe(() => {
+        this.prioritys = this.prioritys.filter(priority => priority.priorityId !== id);
+      });
+    }
+  }
   // Navigate to new Priority form
   addPriority() {
     this.router.navigate(['/priority']);
   }
   goBack() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/dashboard']);
   }
 
  

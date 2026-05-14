@@ -20,20 +20,28 @@
             // GET: /api/categories
             group.MapGet("/", async (AppDbContext db) =>
             {
-                var categories = await db.Categories.ToListAsync();
+                var categories = await db.Categories.Where(c => !c.IsDeleted).ToListAsync();
                 return Results.Ok(categories);
             });
 
             // GET: /api/categories/{id}
             group.MapGet("/{id:int}", async (int id, AppDbContext db) =>
             {
-                var category = await db.Categories.FindAsync(id);
+                var category = await db.Categories.Where(c => !c.IsDeleted).FirstOrDefaultAsync(c => c.CategoryId == id);
                 return category is not null ? Results.Ok(category) : Results.NotFound();
             });
 
             // POST: /api/categories
             group.MapPost("/", async (Category category, AppDbContext db) =>
             {
+                var categoryReq = await db.Categories.CountAsync(c => !c.IsDeleted);
+                if (categoryReq < 1) //at least one entry in the database to be able to post
+                {
+                    return Results.BadRequest("There must be at least 1 Category");
+                }
+
+                category.IsDeleted = false;
+                category.DateCreated = DateTime.Now;
                 db.Categories.Add(category);
                 await db.SaveChangesAsync();
                 return Results.Created($"/api/categories/{category.CategoryId}", category);
@@ -45,7 +53,10 @@
                 var category = await db.Categories.FindAsync(id);
                 if (category is null) return Results.NotFound();
 
-                category.Name = updatedCategory.Name;  // Update properties as needed
+                // Propeties be updated.
+                category.Name = updatedCategory.Name;  
+                category.DateCreated = updatedCategory.DateCreated;
+
                 await db.SaveChangesAsync();
                 return Results.NoContent();
             });
@@ -56,7 +67,7 @@
                 var category = await db.Categories.FindAsync(id);
                 if (category is null) return Results.NotFound();
 
-                db.Categories.Remove(category);
+                category.IsDeleted = true;
                 await db.SaveChangesAsync();
                 return Results.NoContent();
             });

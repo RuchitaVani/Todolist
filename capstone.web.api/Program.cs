@@ -6,7 +6,7 @@ using capstone.web.api.Data;
 using capstone.web.api.Models;
 using capstone.web.api.Endpoints;
 
-
+//adding a comment just to test commit
 namespace capstone.web.api
 {
     public class Program
@@ -55,7 +55,7 @@ namespace capstone.web.api
             });
 
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer((builder.Configuration.GetConnectionString("DefaultConnection"))));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Enable authorization
             builder.Services.AddAuthorization();
@@ -95,8 +95,8 @@ namespace capstone.web.api
             app.MapUserEndpoints();
             app.MapCategoryEndpoints();
             app.MapPriorityEndpoints();
-
-            
+            app.MapQuestEndpoints();
+            app.MapStatusEndpoints();
 
             app.Run();
         }
@@ -117,6 +117,16 @@ namespace capstone.web.api
 
                 context.Users.Add(new User
                 {
+                    FirstName = "Jesus",
+                    LastName = "Alapisco",
+                    Email = "alapiscodavilaj@mymacewan.ca",
+                    Username = "alapiscof",
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("1234"), // Securely hash passwords
+                    Role = "Administrator"
+                });
+
+                context.Users.Add(new User
+                {
                     FirstName = "General",
                     LastName = "User",
                     Email = "general@example.com",
@@ -132,14 +142,14 @@ namespace capstone.web.api
                 // Example seed categories
                 context.Categories.Add(new Category
                 {
-                    Name = "1",
+                    Name = "Schoolwork",
                     IsDeleted = false,
                     DateCreated = DateTime.Now,
                 });
 
                 context.Categories.Add(new Category
                 {
-                    Name = "2",
+                    Name = "Personal",
                     IsDeleted = false,
                     DateCreated = DateTime.Now,
                 });
@@ -154,9 +164,95 @@ namespace capstone.web.api
                     Name = "Low",
                     IsDeleted = false,
                     DateCreated = DateTime.Now,
+                    color = "Green",
                 });
+
+                context.Priorities.Add(new Priority
+                {
+                    Name = "Medium",
+                    IsDeleted = false,
+                    DateCreated = DateTime.Now,
+                    color = "Yellow",
+                });
+
+                context.Priorities.Add(new Priority
+                {
+                    Name = "High",
+                    IsDeleted = false,
+                    DateCreated = DateTime.Now,
+                    color = "Orange",
+                });
+
+                context.Priorities.Add(new Priority
+                {
+                    Name = "Critical",
+                    IsDeleted = false,
+                    DateCreated = DateTime.Now,
+                    color = "Red",
+                });
+                context.SaveChanges();  
+            }
+            if (!context.Statuses.Any())
+            {
+                context.Statuses.Add(new Status
+                {
+                    Name = "New",
+                    IsDeleted = false,
+                    DateCreated = DateTime.Now
+                });
+
+                context.Statuses.Add(new Status
+                {
+                    Name = "Active",
+                    IsDeleted = false,
+                    DateCreated = DateTime.Now
+                });
+
+                context.Statuses.Add(new Status
+                {
+                    Name = "Resolved",
+                    IsDeleted = false,
+                    DateCreated = DateTime.Now
+                });
+                context.Statuses.Add(new Status
+                {
+                    Name = "Closed",
+                    IsDeleted = false,
+                    DateCreated = DateTime.Now
+                });
+
                 context.SaveChanges();
             }
+            if (!context.Quests.Any())
+            {
+                // Example seed quests
+                context.Quests.Add(new Quest
+                {
+                    Name = "Go to School",
+                    IsDeleted = false,
+                    DateCreated = DateTime.Now,
+                    DueDate = DateTime.Now,
+                    CategoryId = 1,
+                    PriorityId = 3,
+                    UserId = 1,
+                    StatusId = 1,
+                });
+
+                context.Quests.Add(new Quest
+                {
+                    Name = "Take 21:00 pill",
+                    IsDeleted = false,
+                    DateCreated = DateTime.Now,
+                    DueDate = DateTime.Now,
+                    CategoryId = 2,
+                    PriorityId = 1,
+                    UserId = 3,
+                    StatusId = 1,
+                });
+
+                context.SaveChanges();
+            }
+            
         }
     }
 }

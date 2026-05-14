@@ -1,4 +1,6 @@
-﻿namespace capstone.web.api.Models
+﻿using System.Text.Json.Serialization;
+
+namespace capstone.web.api.Models
 {
     public class User
     {
@@ -9,6 +11,9 @@
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public string Role { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Quest>? Quests { get; set; }
     }
 
 }

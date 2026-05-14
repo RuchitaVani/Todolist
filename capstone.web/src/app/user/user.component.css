@@ -1,0 +1,41 @@
+
+.container { 
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* height: 100vh; Center vertically in the viewport */
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Full width for responsiveness */
+    max-width: 400px; /* Limit the max width */
+}
+
+.form-border {
+border: 2px solid #007bff; /* Border color and width */
+border-radius: 8px; /* Rounded corners */
+padding: 20px; /* Padding inside the border */
+}
+.full-width {
+width: 100%; /* Make form fields full width */
+margin-bottom: 16px; /* Space between fields */
+}
+.large-input {
+font-size: 20px; /* Larger text in input */
+padding: 16px; /* More padding for bigger input */
+min-height: 48px; /* Minimum height for input fields */
+}
+.button-container {
+display: flex;
+justify-content: space-between;
+width: 100%;
+}
+
+.large-button {
+font-size: 20px; /* Larger text on buttons */
+padding: 12px 24px; /* More padding for bigger buttons */
+margin: 8px; /* Space between buttons */
+}

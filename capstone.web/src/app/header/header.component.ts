@@ -3,8 +3,9 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html'
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    standalone: false
 })
 export class HeaderComponent {
   constructor(private userService: UserService, private router: Router) { }

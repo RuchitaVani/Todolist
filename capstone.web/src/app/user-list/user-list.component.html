@@ -1,0 +1,48 @@
+<div class="container">
+
+    <button mat-raised-button type="button" (click)="goBack()" style="background-color: black; color: white; margin-bottom: 15px;">
+      Back
+    </button>
+    <table mat-table [dataSource]="users" class="mat-elevation-z8">
+      <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef>Given name</th>
+          <td mat-cell *matCellDef="let user"><p style="padding: 5px; width: 50%; text-align: center;">{{ user.firstName}}</p></td>
+      </ng-container>
+
+      
+
+      <ng-container matColumnDef="userName">
+          <th mat-header-cell *matHeaderCellDef> Userame</th>
+          <td mat-cell *matCellDef="let user"><p style="padding: 5px; width: 50%; text-align: center;">{{ user.username}}</p></td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let user"><p style="padding: 5px; width: 50%; text-align: center;">{{ user.email}}</p></td>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef>User Type</th>
+          <td mat-cell *matCellDef="let user"><p style="padding: 5px; width: 50%; text-align: center;">{{ user.role}}</p></td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let user">
+            <button (click)="viewUser(user.id)" mat-raised-button color="primary">View</button>
+          </td>
+      </ng-container>
+      <ng-container matColumnDef="actiondelete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let user">
+          <!-- <button
+            (click)="deleteUser(user.id)"
+            mat-raised-button color="warn"
+          >
+            Delete
+          </button> -->
+        </td>
+      </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let user; columns: displayedColumns"></tr>
+    </table>
+</div>

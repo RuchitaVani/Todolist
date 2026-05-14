@@ -1,0 +1,105 @@
+<!-- Form to view and edit quest details
+<div class="container">
+    <form (ngSubmit)="savequest()">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <div style="margin-bottom: 16px;"></div>
+
+      <mat-form-field appearance="fill" class="full-width">
+
+        <mat-label>Choose a date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [(ngModel)]="quest.dateCreated"
+          name="dateCreated"
+          required
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+      </mat-form-field>
+      
+      <section>
+        <button mat-raised-button color="primary" style="margin-right: 8px;">Save</button>
+      
+      <button mat-raised-button color="warn"  style="margin-right: 8px;">Delete</button>
+      
+      <button mat-raised-button color="gray"  style="margin-right: 8px;">Back</button>
+      </section>
+    </form>
+  </div>
+  -->
+
+  <div class="container">
+    <div class="form-border">
+      <form (ngSubmit)="saveQuest()" #questForm="ngForm" class="form-container">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="quest.name"
+            name="name"
+            required
+            class="large-input"
+            #nameInput="ngModel" 
+          />
+          <mat-error *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)">
+            Name is required.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Priority Selection -->
+        <mat-form-field>
+          <mat-label>Priority</mat-label>
+          <mat-select [(ngModel)]="quest.priorityId" name="priority" id="priorityId">
+            <mat-option *ngFor="let priority of priorities" [value]="priority.priorityId">{{ priority.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <!-- Category Selection -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Category</mat-label>
+          <mat-select [(ngModel)]="quest.categoryId" name="category" id="categoryId">
+            <mat-option *ngFor="let category of categories" [value]="category.categoryId">{{ category.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!--Status Selection-->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="quest.statusId" name="status" id="statusId">
+            <mat-option *ngFor="let status of statuses" [value]="status.statusId">{{ status.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <!-- Date Selection -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Choose a date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="quest.dueDate"
+            name="dueDate"
+            required
+            #dateInput="ngModel"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="dateInput.invalid && (dateInput.dirty || dateInput.touched)">
+            Date is required.
+          </mat-error>
+        </mat-form-field>
+  
+        <section class="button-container">
+          <button mat-raised-button color="primary" class="large-button" [disabled]="questForm.invalid">Save</button>
+          <button mat-raised-button color="warn" class="large-button">Delete</button>
+          <button mat-raised-button color="" (click)="goBack()" class="large-button" style="background-color: black; color: white;">Back</button>
+        </section>
+      </form>
+    </div>
+  </div>
+  

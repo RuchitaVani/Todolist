@@ -1,0 +1,4 @@
+.mat-accent {
+  background-color: #4caf50 !important; /* Custom green */
+  color: white !important; /* Ensure good contrast */
+}

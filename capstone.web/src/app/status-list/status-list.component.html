@@ -1,0 +1,50 @@
+<div class="container">
+    <button mat-raised-button (click)="addStatus()" color="accent" style="margin-bottom: 15px; margin-right: 8px;">
+      New status
+    </button>
+  
+    <button mat-raised-button type="button" (click)="goBack()" style="background-color: black; color: white; margin-bottom: 15px;">
+      Back
+    </button>
+    
+    <table mat-table [dataSource]="statuses" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let status" ><b style="padding: 5px; width: 50%; text-align: center;">{{ status.name }}</b></td>
+      </ng-container>
+  
+      <ng-container matColumnDef="dateCreated">
+        <th mat-header-cell *matHeaderCellDef>Date Created</th>
+        <td mat-cell *matCellDef="let status">
+          {{ status.dateCreated | date: "fullDate" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let status">
+          <button
+            (click)="viewStatus(status.statusId)"
+            mat-raised-button color="primary"
+          >
+            View
+          </button>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="actiondelete">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let status">
+            <button
+              (click)="deleteStatus(status.statusId)"
+              mat-raised-button color="warn"
+            >
+              Delete
+            </button>
+          </td>
+        </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let status; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  

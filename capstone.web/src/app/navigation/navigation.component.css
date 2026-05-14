@@ -1,0 +1,29 @@
+.nav-link{
+    color: #c00202 !important;
+}
+
+.button-container {
+    background-color: #f8f9fa00; /* Light grey background */
+    border-radius: 10px; /* Rounded corners */
+    width: 200px; /* Adjust width as needed */
+    margin: 0 auto; /* Center horizontally if needed */
+  }
+  .button-container button {
+    transition: all 0.2s ease-in-out;
+  }
+  .button-container button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .btn btn-outline-danger 
+  {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+  }
+  .mb-2 
+  {
+    border-width: 1.5px; 
+    border-color: rgb(75, 75, 75)
+
+  }

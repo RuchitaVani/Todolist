@@ -1,0 +1,49 @@
+<div class="container">
+  <button mat-raised-button (click)="addCategory()" color="accent" style="margin-bottom: 15px; margin-right: 8px;">
+    New category
+  </button>
+
+  <button mat-raised-button type="button" (click)="goBack()" style="background-color: black; color: white; margin-bottom: 15px;">
+    Back
+  </button>
+  
+  <table mat-table [dataSource]="categories" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let category" ><b style="padding: 5px; width: 50%; text-align: center;">{{ category.name }}</b></td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateCreated">
+      <th mat-header-cell *matHeaderCellDef>Date Created</th>
+      <td mat-cell *matCellDef="let category">
+        {{ category.dateCreated | date: "fullDate" }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let category">
+        <button
+          (click)="viewCategory(category.categoryId)"
+          mat-raised-button color="primary"
+        >
+          View
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actiondelete">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let category">
+          <button
+            (click)="deleteCategory(category.categoryId)"
+            mat-raised-button color="warn"
+          >
+            Delete
+          </button>
+        </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let category; columns: displayedColumns"></tr>
+  </table>
+</div>

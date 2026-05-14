@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="signup">
+      <div class="header-nav">
+        <div class="list">
+          <div class="item-link">
+            <div class="wednesday">{{ dayOfWeek }}</div>
+          </div>
+          <div class="div">{{ currentDate }}</div>
+          <div class="div1">{{ currentTime }}</div>
+          <img
+            alt="notification"
+            src="../../assets/bellSimple.svg"
+            class="list-item"
+          />
+        </div>
+        <img
+          class="final-logo-1-icon"
+          alt=""
+          src="../../assets/final_logo.png"
+        />
+      </div>
+      <div class="footer-parent">
+        <div class="footer"></div>
+        <div class="row mr-0">
+          <div class="col-md-6">
+            <div class="footer1"></div>
+          </div>
+          <div class="col-md-6">
+            <form class="form" (ngSubmit)="register()">
+              <div class="divcol-12">
+                <div class="signup1 d-flex justify-content-center pt-4">
+                  <span>Sign</span>
+                  <span class="up">up</span>
+                </div>
+
+                <div class="d-flex justify-content-center pt-4 pb-4">
+                  <span>Get yourself </span>
+                  <span class="todo">
+                    <span class="up ml-1">TODO</span>
+                  </span>
+                  <span>
+                    <span class="ml-1">more</span>
+                  </span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center align-item-center">
+                <div class="">
+                  <div>
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="First Name"
+                      [(ngModel)]="firstName"
+                      name="firstName"
+                      required
+                      (input)="validateInput('firstName')"
+                      [ngClass]="{'valid': firstNameValid, 'invalid': !firstNameValid && firstName.length > 0}"
+                    />
+                    <i class="fas" [ngClass]="{'fa-check-circle text-success': firstNameValid, 'fa-times-circle text-danger': !firstNameValid}"></i>
+                  </div>
+
+                  <div>
+                    <input
+                      type="text"
+                      class="input"
+                      placeholder="Last Name"
+                      [(ngModel)]="lastName"
+                      name="lastName"
+                      required
+                      (input)="validateInput('lastName')"
+                      [ngClass]="{'valid': lastNameValid, 'invalid': !lastNameValid && lastName.length > 0}"
+                    />
+                    <i class="fas" [ngClass]="{'fa-check-circle text-success': lastNameValid, 'fa-times-circle text-danger': !lastNameValid}"></i>
+                  </div>
+
+                  <div>
+                    <input
+                      type="email"
+                      class="input"
+                      placeholder="Email"
+                      [(ngModel)]="email"
+                      name="email"
+                      required
+                      (input)="validateInput('email')"
+                      [ngClass]="{'valid' : emailValid, 'invalid': !emailValid && email.length > 0}"
+                    />
+                    <i class="fas" [ngClass]="{'fa-check-circle text-success':emailValid, 'fa-times-circle text-danger': !emailValid}"></i>
+                  </div>
+
+                  <div>
+                    <input
+                      type="text"
+                      class="input"
+                      placeholder="Username"
+                      [(ngModel)]="username"
+                      name="username"
+                      required
+                      (input)="validateInput('username')"
+                      [ngClass]="{'valid': usernameValid, 'invalid': !usernameValid && username.length > 0}"
+                    />
+                    <i class="fas" [ngClass]="{'fa-check-circle text-success': usernameValid, 'fa-times-circle text-danger': !usernameValid}"></i>
+                  </div>
+
+                  <div>
+                    <input
+                      type="password"
+                      class="input"
+                      placeholder="Password"
+                      [(ngModel)]="password"
+                      name="password"
+                      required
+                      (input)="validateInput('password')"
+                      [ngClass]="{'valid': passwordValid, 'invalid': !passwordValid && password.length > 0}"
+                    />
+                    <i class="fas" [ngClass]="{'fa-check-circle text-success': passwordValid, 'fa-times-circle text-danger': !passwordValid}"></i>
+                  </div>
+
+                  <div>
+                    <input
+                      type="password"
+                      class="input"
+                      placeholder="Confirm Password"
+                      [(ngModel)]="confirmPassword"
+                      name="confirmPassword"
+                      required
+                      (input)="validateInput('confirmPassword')"
+                      [ngClass]="{'valid': confirmPasswordValid, 'invalid': !confirmPasswordValid && confirmPassword.length > 0}"
+                    />
+                    <i class="fas" [ngClass]="{'fa-check-circle text-success': confirmPasswordValid, 'fa-times-circle text-danger': !confirmPasswordValid}"></i>
+                  </div>
+
+                  <!-- <div>
+                    <label for="roles">Choose a Role:</label>
+                    <select
+                      name="role"
+                      id="role"
+                      class="input"
+                      [(ngModel)]="role"
+                      required
+                    >
+                      <option value="" disabled selected>Select Role</option>
+                      <option value="Administrator">Administrator</option>
+                      <option value="General">General</option>
+                    </select>
+                  </div> -->
+
+                  <div class="heading-4-container m-3">
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      name="terms"
+                      value="terms"
+                      required
+                    />
+                    <span>Accept Terms & Conditions </span>
+                    <span class="learn-more ml-1">Learn More</span>
+                  </div>
+                  <div class="d-flex justify-content-center mb-3">
+                    <button class="button3" [disabled]="isSubmitting">
+                      <div class="signup2">Register</div>
+                    </button>
+                  </div>
+
+                  <div *ngIf="message" class="alert alert-danger mt-2">{{ message }}</div>
+
+                  <div class="ptext-center pb-4">
+                    <div class="already-have-an-container">
+                      <span class="already-have-an-container1 pb-4">
+                        <span>Already have an account? </span>
+                        <a class="signin" href="/login">Signin</a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="footer-group">
+          <div class="footer1"></div>
+          <img
+            class="young-woman-working-on-laptop"
+            alt=""
+            src="..\assets\woman-register.png"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

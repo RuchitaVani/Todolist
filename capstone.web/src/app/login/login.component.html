@@ -1,27 +1,80 @@
-<div class="container">
-  <div class="row">
-    <div class="col-8  col-md-offset-1">
-      <h1 class="text-center login-title"><img class="profile-img text-center" src="/assets/profile-image.png" width="100px" alt="">Welcome back!</h1>
-      <div class="account-wall">
+<div class="new-signin-page">
+  <div class="footer"></div>
 
-
-        <form class="form-signin" (ngSubmit)="login()">
-          <input type="text" class="form-control" placeholder="User Name" id="username" [(ngModel)]="username" name="username" required autofocus>
-          <input type="password" class="form-control" placeholder="Password" id="password" [(ngModel)]="password" name="password" required>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Sign in
-          </button>
-          <label class="checkbox pull-left">
-            <input type="checkbox" value="remember-me">
-            Remember me
-          </label>
-          <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
-        </form>
+  <form class="form" (ngSubmit)="login()">  
+    <div class="divrow">
+      <div class="divcol-12">
+        <div class="heading-1">
+          <div class="signin">
+            <span class="signin-txt">
+              <span>Sign</span>
+              <span class="in">in</span>
+            </span>
+          </div>
+        </div>
+        <div class="signin-to-add">Signin to add a task</div>
+      </div>      
+      <div class="divlogin-form">
+        <div class="divform-input">
+          <div class="input">
+            <div class="divplaceholder">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Username"
+                id="username"
+                [(ngModel)]="username"
+                name="username"
+                required
+                autofocus
+                (input)="validateInput('username')"
+              />
+              <i class="fas" [ngClass]="{'fa-check-circle text:success' : usernameValid, 'fa-times-circle text-danger': !usernameValid}"></i>
+            </div>
+          </div>
+        </div>
+        <div class="divform-input1">
+          <div class="input1">
+            <div class="divplaceholder1">
+              <div class="password">
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Password"
+                [(ngModel)]="password"
+                name="password"
+                required
+                (input)="validateInput('password')"
+              />
+              <i class="fas" [ngClass]="{'fa-check-circle text:success' : passwordValid, 'fa-times-circle text-danger': !passwordValid}"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <a href="#" class="text-center new-account">Create an account </a>
+      <a href="#"><div class="link-forgot">Forgot Password?</div></a>
+      <button class="button1 signin1" type="submit">
+        Sign in
+      </button>
+      <div class="ptext-center"></div>
+      <div class="do-not-have-container">
+        <span class="do-not-have-container1">
+          <span>Do not have an account? </span>
+          <a href="registration" class="create-an-account">Create an account.</a>
+        </span>
+      </div>      
     </div>
-    <div *ngIf="errorMessage" class="col-8  col-md-offset-1 alert alert-danger">
-      {{ errorMessage }}
+    <div *ngIf="errorMessage" class="mat-elevation-z4 mat-error error-message position-relative border rounded">
+      <mat-icon>error_outline</mat-icon> 
+      <span>{{ errorMessage }}</span>
     </div>
-  </div>
+  </form>
+
+  <!-- <app-time-bar></app-time-bar> -->
+  <img
+    class="young-woman-working-at-desk-1"
+    alt="young women working at desk"
+    src="../../assets/young-woman-working-at-desk.png"
+  />
 </div>
